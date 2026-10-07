@@ -1,0 +1,843 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMyxk8oFNwJu23QF+Zb/BaW",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/ViperRTX-xx/Data-analytics/blob/main/case%20study\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 4,
+      "metadata": {
+        "id": "4gprUHGpoKbV"
+      },
+      "outputs": [],
+      "source": [
+        "#employee performance and  salary analysis\n",
+        "import numpy as np\n",
+        "emp=np.array([\"arun\",\"bhavana\",\"charan\",\"diviya\",\"eshan\",\"fathima\"])\n",
+        "perf=np.array([\n",
+        "    [78,82,85,88],\n",
+        "    [65,70,68,74],\n",
+        "    [92,89,95,91],\n",
+        "    [55,62,60,67],\n",
+        "    [81,79,84,87],\n",
+        "    [72,75,78,80]\n",
+        "])\n",
+        "quarters=np.array([\"q1\",\"q2\",\"q3\",\"q4\"])"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#calc total_performance score  of every employyye\n",
+        "total_performance=np.sum(perf,axis=1)\n",
+        "print(total_performance)\n",
+        "for name ,total in zip(emp,total_performance):\n",
+        "  print(name,\":\",total)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-YSD71t1p5m4",
+        "outputId": "86eb0997-21dc-47c2-8aa0-715844e17d39"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[333 277 367 244 331 305]\n",
+            "arun : 333\n",
+            "bhavana : 277\n",
+            "charan : 367\n",
+            "diviya : 244\n",
+            "eshan : 331\n",
+            "fathima : 305\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#cal average quarterly prformance of every employee\n",
+        "avg_perf=np.mean(perf,axis=1)\n",
+        "for i in range(len(emp)):\n",
+        "   print(emp[i],\":\",avg_perf[i])\n",
+        ""
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Pl3XI3aitFyr",
+        "outputId": "124f5304-0d06-47f8-e567-ae0659d50303"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "arun : 83.25\n",
+            "bhavana : 69.25\n",
+            "charan : 91.75\n",
+            "diviya : 61.0\n",
+            "eshan : 82.75\n",
+            "fathima : 76.25\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#cal avg performance for each quarter\n",
+        "quarter_avg=np.mean(perf,axis=0)\n",
+        "print(quarter_avg)\n",
+        "#or\n",
+        "for i in range(4):\n",
+        "  print(\"q\",i+1,\":\",quarter_avg[i])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CrAj2TVEvCay",
+        "outputId": "88002e94-4c32-4e48-fa8c-ada32a853fe1"
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[73.83333333 76.16666667 78.33333333 81.16666667]\n",
+            "q 1 : 73.83333333333333\n",
+            "q 2 : 76.16666666666667\n",
+            "q 3 : 78.33333333333333\n",
+            "q 4 : 81.16666666666667\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#identify the emp with highest total prformance\n",
+        "total_performance=np.sum(perf,axis=1)\n",
+        "highest=np.argmax(total_performance)\n",
+        "print(\"highest preformer:\",emp[highest])\n",
+        "print(\"total_performance:\",total_performance[highest])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "z_jpkdrGxMjv",
+        "outputId": "f5a7352d-0add-4c91-9130-734d6052c49a"
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "highest preformer: charan\n",
+            "total_performance: 367\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#rank all emp based on thier total_performance\n",
+        "rank=np.argsort(total_performance)[::-1]\n",
+        "for i in range(len(emp)):\n",
+        "  print(i+1,\":\",emp[rank[i]],\":\",total_performance[rank[i]])\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "oqZHSFTmyyjt",
+        "outputId": "bbd24fb2-e20b-4057-b2cd-a6475621b794"
+      },
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "1 : charan : 367\n",
+            "2 : arun : 333\n",
+            "3 : eshan : 331\n",
+            "4 : fathima : 305\n",
+            "5 : bhavana : 277\n",
+            "6 : diviya : 244\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#calc the quarter over quarter percentage growth for every emp from q1 to q4\n",
+        "growth=np.round((perf[:, 1:]-perf[:, :-1])/perf[:,:-1]*100,2)\n",
+        "for i in range(len(emp)):\n",
+        "  print(emp[i],\":\",growth[i])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XP-NGX5p009X",
+        "outputId": "dc64777b-8b31-4f55-dbd8-0ecc91c284ee"
+      },
+      "execution_count": 39,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "arun : [5.13 3.66 3.53]\n",
+            "bhavana : [ 7.69 -2.86  8.82]\n",
+            "charan : [-3.26  6.74 -4.21]\n",
+            "diviya : [12.73 -3.23 11.67]\n",
+            "eshan : [-2.47  6.33  3.57]\n",
+            "fathima : [4.17 4.   2.56]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#identify emp whose avg perf is greater than or =80\n",
+        "avg=np.mean(perf,axis=1)\n",
+        "for i in range(len(emp)):\n",
+        "  if avg[i]>=80:\n",
+        "    print(emp[i],\":\",avg[i])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Uo_Hbvii4XCW",
+        "outputId": "1e8a6bc8-30bc-4630-dd52-89347ffd5ca2"
+      },
+      "execution_count": 41,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "arun : 83.25\n",
+            "charan : 91.75\n",
+            "eshan : 82.75\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#count how many emp have an avg performance below 70\n",
+        "avg=np.mean(perf,axis=1)\n",
+        "count=0\n",
+        "for i in range(len(emp)):\n",
+        "  if avg[i] < 79:\n",
+        "    count=count+1\n",
+        "print(\"no of emp\",count)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "pkZSMCSA5ZeV",
+        "outputId": "c3d7720c-7880-4264-f51c-892c6df445fd"
+      },
+      "execution_count": 46,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "no of emp 3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#find the highest performances score recorded in the entire dataset\n",
+        "highest=np.max(perf)\n",
+        "print(\"highest\",highest)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "BSipOfz5EkUk",
+        "outputId": "7768a3e0-ea75-4247-8ef4-c3221c0feed8"
+      },
+      "execution_count": 47,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "highest 95\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# identify the emp and quarters in whch the highest performance score occured\n",
+        "highest=np.max(perf)\n",
+        "for i in range(len(emp)):\n",
+        "    for j in range (4):\n",
+        "      if perf[i][j] == highest:\n",
+        "        print(\"employee\",emp[i])\n",
+        "        print(\"quarters:q\",j+1)\n",
+        "        print(\"score\",highest)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "UP8XTuPQFOxX",
+        "outputId": "e8366755-4ff3-42c5-f406-a94b22aea93b"
+      },
+      "execution_count": 48,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "employee charan\n",
+            "quarters:q 3\n",
+            "score 95\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "51-_TQahObc5"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#case study 2\n",
+        "import numpy as np\n",
+        "\n",
+        "stores = [\"Store_A\", \"Store_B\", \"Store_C\", \"Store_D\", \"Store_E\"]\n",
+        "\n",
+        "sales = np.array([\n",
+        "    [120000, 135000, 142000, 155000],\n",
+        "    [98000, 105000, 110000, 108000],\n",
+        "    [150000, 148000, 160000, 172000],\n",
+        "    [87000, 92000, 99000, 115000],\n",
+        "    [130000, 138000, 141000, 149000]\n",
+        "])"
+      ],
+      "metadata": {
+        "id": "lgTJjlLUOcnK"
+      },
+      "execution_count": 49,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "total = np.sum(sales, axis=1)\n",
+        "\n",
+        "print(total)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "jfRd_twDPIO2",
+        "outputId": "6b1b01cc-1c56-4f49-e6d7-922d64f6834f"
+      },
+      "execution_count": 50,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[552000 421000 630000 393000 558000]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "avg = np.mean(sales, axis=1)\n",
+        "\n",
+        "print(avg)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "temgHBUMPQgR",
+        "outputId": "d43320d6-7f66-4c4a-8c7d-805fa5a2082f"
+      },
+      "execution_count": 51,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[138000. 105250. 157500.  98250. 139500.]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "highest = np.argmax(total)\n",
+        "\n",
+        "print(stores[highest])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ildEawrOPakM",
+        "outputId": "aaf91f1a-ab9f-42c0-c1d5-4c3eae2f58f7"
+      },
+      "execution_count": 52,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Store_C\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "rank = np.argsort(total)[::-1]\n",
+        "for i in rank:\n",
+        "    print(stores[i], total[i])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "AzEe7H6wPhYh",
+        "outputId": "ee774ff1-9f91-47c3-bedc-24eb80dec4ac"
+      },
+      "execution_count": 54,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Store_C 630000\n",
+            "Store_E 558000\n",
+            "Store_A 552000\n",
+            "Store_B 421000\n",
+            "Store_D 393000\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "change = (sales[:, 1:] - sales[:, :-1]) / sales[:, :-1] * 100\n",
+        "\n",
+        "print(change)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "N7HwD1FPPvbi",
+        "outputId": "189d1a71-519c-47ed-a043-a2c49614ef5e"
+      },
+      "execution_count": 55,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[[12.5         5.18518519  9.15492958]\n",
+            " [ 7.14285714  4.76190476 -1.81818182]\n",
+            " [-1.33333333  8.10810811  7.5       ]\n",
+            " [ 5.74712644  7.60869565 16.16161616]\n",
+            " [ 6.15384615  2.17391304  5.67375887]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(np.round(change, 2))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "6HlKgxvXP61N",
+        "outputId": "cc1bb42e-bfc6-4f39-bc47-c5afe615f36e"
+      },
+      "execution_count": 57,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[[12.5   5.19  9.15]\n",
+            " [ 7.14  4.76 -1.82]\n",
+            " [-1.33  8.11  7.5 ]\n",
+            " [ 5.75  7.61 16.16]\n",
+            " [ 6.15  2.17  5.67]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "overall_avg = np.mean(total)\n",
+        "\n",
+        "print(\"Overall average:\", overall_avg)\n",
+        "\n",
+        "for i in range(len(stores)):\n",
+        "    if total[i] > overall_avg:\n",
+        "        print(stores[i])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nixC7XPjP9d4",
+        "outputId": "cf0e1840-7157-4ef6-8021-90b7733a1353"
+      },
+      "execution_count": 58,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Overall average: 510800.0\n",
+            "Store_A\n",
+            "Store_C\n",
+            "Store_E\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "3JZT8Y0-QD2n"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#case study3\n",
+        "#student performance\n",
+        "import numpy as np\n",
+        "\n",
+        "students = [\"Anu\", \"Binu\", \"Cathy\", \"Deepa\", \"Ebin\", \"Fahad\"]\n",
+        "\n",
+        "marks = np.array([\n",
+        "    [82, 75, 91, 88],\n",
+        "    [61, 68, 70, 65],\n",
+        "    [45, 52, 48, 55],\n",
+        "    [90, 94, 89, 92],\n",
+        "    [72, 80, 76, 85],\n",
+        "    [38, 42, 49, 44]\n",
+        "])\n",
+        "\n",
+        "subjects = [\"Python\", \"SQL\", \"Excel\", \"Statistics\"]"
+      ],
+      "metadata": {
+        "id": "BR6rAlAqQEXH"
+      },
+      "execution_count": 59,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "total = np.sum(marks, axis=1)\n",
+        "avg = np.mean(marks, axis=1)\n",
+        "\n",
+        "print(\"Total:\", total)\n",
+        "print(\"Average:\", avg)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "z9BbxpG1Qibu",
+        "outputId": "2d25d86e-bedd-4a89-acbb-3f013a3d7c3d"
+      },
+      "execution_count": 60,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Total: [336 264 200 365 313 173]\n",
+            "Average: [84.   66.   50.   91.25 78.25 43.25]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "subject_avg = np.mean(marks, axis=0)\n",
+        "\n",
+        "print(subject_avg)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "M9g0FCvGQmlZ",
+        "outputId": "7308c671-71b4-4cf6-acd1-a1fcc706b6eb"
+      },
+      "execution_count": 61,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[64.66666667 68.5        70.5        71.5       ]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "highest = np.max(marks, axis=0)\n",
+        "\n",
+        "print(highest)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Hv7ZvlqKQqWG",
+        "outputId": "f5803de8-2f72-4829-caa0-a050e9feb073"
+      },
+      "execution_count": 62,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[90 94 91 92]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "highest = np.argmax(marks, axis=0)\n",
+        "\n",
+        "for i in range(len(subjects)):\n",
+        "    print(subjects[i], students[highest[i]], marks[highest[i], i])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "LaCszdtfQuki",
+        "outputId": "a27ce77d-a473-4567-8b95-90478b2f182e"
+      },
+      "execution_count": 63,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Python Deepa 90\n",
+            "SQL Deepa 94\n",
+            "Excel Anu 91\n",
+            "Statistics Deepa 92\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "status = np.where(marks >= 50, \"Pass\", \"Fail\")\n",
+        "\n",
+        "print(status)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "LPT2femLQx3U",
+        "outputId": "a5803b5e-bb50-4da2-a4c4-5054e7eced11"
+      },
+      "execution_count": 64,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[['Pass' 'Pass' 'Pass' 'Pass']\n",
+            " ['Pass' 'Pass' 'Pass' 'Pass']\n",
+            " ['Fail' 'Pass' 'Fail' 'Pass']\n",
+            " ['Pass' 'Pass' 'Pass' 'Pass']\n",
+            " ['Pass' 'Pass' 'Pass' 'Pass']\n",
+            " ['Fail' 'Fail' 'Fail' 'Fail']]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "passed_all = np.all(marks >= 50, axis=1)\n",
+        "\n",
+        "for i in range(len(students)):\n",
+        "    if passed_all[i]:\n",
+        "        print(students[i])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Ql7nxGwqQ1Sl",
+        "outputId": "dfe3550f-804f-4299-db23-d1e2f53870d6"
+      },
+      "execution_count": 65,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Anu\n",
+            "Binu\n",
+            "Deepa\n",
+            "Ebin\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for i in range(len(students)):\n",
+        "    if avg[i] < 60:\n",
+        "        print(students[i])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "TW-egJ5gQ5wJ",
+        "outputId": "7c848495-ce54-4151-e78a-27397e1309bb"
+      },
+      "execution_count": 66,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Cathy\n",
+            "Fahad\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for i in range(len(students)):\n",
+        "    if avg[i] >= 80:\n",
+        "        grade = \"A\"\n",
+        "    elif avg[i] >= 60:\n",
+        "        grade = \"B\"\n",
+        "    elif avg[i] >= 50:\n",
+        "        grade = \"C\"\n",
+        "    else:\n",
+        "        grade = \"F\"\n",
+        "\n",
+        "    print(students[i], grade)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "04kcLa_1Q__b",
+        "outputId": "e9c08906-4193-4ed2-bcd9-2a9bac6be63a"
+      },
+      "execution_count": 67,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Anu A\n",
+            "Binu B\n",
+            "Cathy C\n",
+            "Deepa A\n",
+            "Ebin B\n",
+            "Fahad F\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
